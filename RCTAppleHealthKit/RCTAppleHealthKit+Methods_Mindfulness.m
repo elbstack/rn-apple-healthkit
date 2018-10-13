@@ -11,6 +11,22 @@
 
 @implementation RCTAppleHealthKit (Methods_Sleep)
 
+- (void)canWriteMindfulSession:(RCTResponseSenderBlock)callback {
+    self.healthStore = [[HKHealthStore alloc] init];
+    
+    if ([HKHealthStore isHealthDataAvailable]) {
+        HKObjectType *type = [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierMindfulSession];
+        
+        HKAuthorizationStatus canWriteStatus = [self.healthStore authorizationStatusForType:(type)];
+        
+        BOOL canWrite = canWriteStatus == HKAuthorizationStatusSharingAuthorized;
+        
+        callback(@[[NSNull null], @(canWrite)]);
+    } else {
+        callback(@[[NSNull null], @false]);
+    }
+}
+
 
 - (void)mindfulness_saveMindfulSession:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
 {

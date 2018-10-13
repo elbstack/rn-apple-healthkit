@@ -183,6 +183,10 @@ RCT_EXPORT_METHOD(getInfo:(NSDictionary *)input callback:(RCTResponseSenderBlock
     [self getModuleInfo:input callback:callback];
 }
 
+RCT_EXPORT_METHOD(canWriteMindfulSession:(RCTResponseSenderBlock)callback) {
+    [self mindfulness_canWriteMindfulSession:callback:callback];
+}
+
 RCT_EXPORT_METHOD(saveMindfulSession:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self mindfulness_saveMindfulSession:input callback:callback];
@@ -202,7 +206,6 @@ RCT_EXPORT_METHOD(saveWorkout:(NSDictionary *)input callback:(RCTResponseSenderB
     }
     callback(@[[NSNull null], @(isAvailable)]);
 }
-
 
 - (void)initializeHealthKit:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
 {
